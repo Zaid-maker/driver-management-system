@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+@variant dark (.dark &);
+
+/* Custom styles can be added below */

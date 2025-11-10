@@ -1,0 +1,25 @@
+{
+  "name": "driver-management-system",
+  "version": "1.0.0",
+  "description": "Full-stack driver management system with React frontend and Bun backend",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -n \"server,client\" -c \"green,blue\" \"cd server && bun run dev\" \"cd client && npm run dev\"",
+    "start": "concurrently -n \"server,client\" -c \"green,blue\" \"cd server && bun run start\" \"cd client && npm run dev\"",
+    "seed": "cd server && bun run seed",
+    "install:all": "cd server && bun install && cd ../client && npm install",
+    "build:server": "cd server && bun run build",
+    "build:client": "cd client && npm run build",
+    "build": "concurrently -n \"server,client\" -c \"green,blue\" \"npm run build:server\" \"npm run build:client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "keywords": [
+    "driver-management",
+    "react",
+    "bun",
+    "express",
+    "mongodb"
+  ]
+}
