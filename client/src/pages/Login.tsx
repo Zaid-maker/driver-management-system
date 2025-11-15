@@ -32,7 +32,7 @@ const Login = () => {
     try {
       await login(formData.email, formData.password);
       // Redirect to dashboard after successful login
-      navigate("/");
+      navigate("/dashboard");
     } catch (err: any) {
       setError(err.message || "Login failed. Please check your credentials.");
     } finally {
