@@ -262,6 +262,319 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              How It Works
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Get started in minutes with our simple three-step process
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '01',
+                title: 'Create Your Account',
+                description: 'Sign up and set up your organization profile in less than 2 minutes.',
+                icon: (
+                  <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                  </svg>
+                ),
+              },
+              {
+                step: '02',
+                title: 'Add Your Drivers',
+                description: 'Import existing driver data or add new drivers with complete profiles.',
+                icon: (
+                  <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                ),
+              },
+              {
+                step: '03',
+                title: 'Start Managing',
+                description: 'Track licenses, monitor activity, and keep your fleet running smoothly.',
+                icon: (
+                  <svg className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
+              },
+            ].map((item, i) => (
+              <div key={i} className="relative">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-8 text-center border-2 border-blue-100 dark:border-gray-700">
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full">
+                    Step {item.step}
+                  </div>
+                  <div className="flex justify-center mb-6 mt-4 text-blue-600 dark:text-blue-400">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {item.description}
+                  </p>
+                </div>
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <svg className="h-8 w-8 text-blue-300 dark:text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Trusted by Industry Leaders
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              See what transportation companies are saying about DriverHub
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                quote: "DriverHub has completely transformed how we manage our fleet. The license tracking feature alone has saved us countless hours and prevented compliance issues.",
+                author: "Sarah Johnson",
+                role: "Fleet Manager",
+                company: "TransGlobal Logistics",
+                avatar: "SJ",
+              },
+              {
+                quote: "The intuitive interface and powerful features make driver management effortless. Our team was up and running in less than a day.",
+                author: "Michael Chen",
+                role: "Operations Director",
+                company: "Metro Transport Co.",
+                avatar: "MC",
+              },
+              {
+                quote: "Real-time analytics and automated alerts have given us unprecedented visibility into our operations. Highly recommend!",
+                author: "David Martinez",
+                role: "VP of Operations",
+                company: "Express Delivery Services",
+                avatar: "DM",
+              },
+            ].map((testimonial, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
+                <div className="flex items-center mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 mb-6 italic">
+                  "{testimonial.quote}"
+                </p>
+                <div className="flex items-center">
+                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white font-bold mr-4">
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900 dark:text-white">{testimonial.author}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</div>
+                    <div className="text-sm text-blue-600 dark:text-blue-400">{testimonial.company}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Integration Section */}
+      <section className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Seamless Integrations
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Connect with the tools you already use
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              'GPS Tracking',
+              'Payroll Systems',
+              'Fleet Management',
+              'HR Software',
+              'Time Tracking',
+              'Compliance Tools',
+              'Communication Apps',
+              'Reporting Tools',
+            ].map((integration, i) => (
+              <div key={i} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 text-center hover:shadow-lg transition-all transform hover:-translate-y-1">
+                <div className="h-16 w-16 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg flex items-center justify-center">
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div className="font-medium text-gray-900 dark:text-white">{integration}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-gray-50 dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Everything you need to know about DriverHub
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            {[
+              {
+                question: 'How quickly can I get started?',
+                answer: 'You can create your account and start adding drivers in less than 5 minutes. Our intuitive interface requires no training, and our support team is available 24/7 to help.',
+              },
+              {
+                question: 'Is my data secure?',
+                answer: 'Absolutely. We use enterprise-grade encryption, secure data centers, and comply with all major data protection regulations including GDPR and CCPA.',
+              },
+              {
+                question: 'Can I import my existing driver data?',
+                answer: 'Yes! We support bulk imports from CSV, Excel, and most major fleet management systems. Our team can help with data migration at no extra cost.',
+              },
+              {
+                question: 'What kind of support do you offer?',
+                answer: 'We provide 24/7 email and chat support, comprehensive documentation, video tutorials, and dedicated account managers for enterprise customers.',
+              },
+              {
+                question: 'Do you offer a mobile app?',
+                answer: 'Our web platform is fully responsive and works perfectly on all mobile devices. Native iOS and Android apps are coming soon.',
+              },
+              {
+                question: 'Can I cancel anytime?',
+                answer: 'Yes, there are no long-term contracts or cancellation fees. You can cancel your subscription at any time with just a few clicks.',
+              },
+            ].map((faq, i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md border border-gray-100 dark:border-gray-700">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <svg className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  {faq.question}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed pl-9">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Teaser Section */}
+      <section className="py-20 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Choose the plan that fits your fleet size
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {[
+              {
+                name: 'Starter',
+                price: '$29',
+                period: '/month',
+                description: 'Perfect for small fleets',
+                features: ['Up to 25 drivers', 'Basic analytics', 'Email support', 'Mobile access', 'License tracking'],
+                popular: false,
+              },
+              {
+                name: 'Professional',
+                price: '$79',
+                period: '/month',
+                description: 'For growing businesses',
+                features: ['Up to 100 drivers', 'Advanced analytics', 'Priority support', 'API access', 'Custom reports', 'Integrations'],
+                popular: true,
+              },
+              {
+                name: 'Enterprise',
+                price: 'Custom',
+                period: '',
+                description: 'For large organizations',
+                features: ['Unlimited drivers', 'Dedicated support', 'Custom integrations', 'SLA guarantee', 'Training included', 'Account manager'],
+                popular: false,
+              },
+            ].map((plan, i) => (
+              <div
+                key={i}
+                className={`relative bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg border-2 ${
+                  plan.popular
+                    ? 'border-blue-600 dark:border-blue-400 transform scale-105'
+                    : 'border-gray-200 dark:border-gray-700'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-sm font-bold px-4 py-1 rounded-full">
+                    Most Popular
+                  </div>
+                )}
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{plan.name}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{plan.description}</p>
+                  <div className="flex items-end justify-center">
+                    <span className="text-5xl font-bold text-gray-900 dark:text-white">{plan.price}</span>
+                    <span className="text-gray-600 dark:text-gray-400 ml-2">{plan.period}</span>
+                  </div>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, j) => (
+                    <li key={j} className="flex items-center text-gray-700 dark:text-gray-300">
+                      <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/login"
+                  className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all ${
+                    plan.popular
+                      ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'
+                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700'
+                  }`}
+                >
+                  Get Started
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
