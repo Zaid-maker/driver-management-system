@@ -1,6 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { Subscription } from '../models/subscription.model.js';
 import { Driver } from '../models/driver.model.js';
+import { PLANS } from '../config/plans.js';
 
 // Middleware to check if subscription is active
 export const requireActiveSubscription = async (
@@ -11,12 +12,33 @@ export const requireActiveSubscription = async (
   try {
     const userId = req.user?._id;
 
-    const subscription = await Subscription.findOne({ user: userId });
+    let subscription = await Subscription.findOne({ user: userId });
 
+    // Auto-create a trial subscription if none exists
     if (!subscription) {
-      return res.status(403).json({
-        message: 'No active subscription found',
-        code: 'NO_SUBSCRIPTION',
+      const now = new Date();
+      const trialEnd = new Date(now);
+      trialEnd.setDate(trialEnd.getDate() + (PLANS['starter']?.trialDays || 14));
+
+      subscription = await Subscription.create({
+        user: userId,
+        plan: 'starter',
+        status: 'trialing',
+        currentPeriodStart: now,
+        currentPeriodEnd: trialEnd,
+        trialEnd,
+        maxDrivers: PLANS['starter']?.features.maxDrivers ?? 25,
+        features: PLANS['starter']?.features ?? {
+          maxDrivers: 25,
+          advancedAnalytics: false,
+          apiAccess: false,
+          customReports: false,
+          prioritySupport: false,
+          unlimitedDrivers: false,
+          customIntegrations: false,
+          dedicatedSupport: false,
+          slaGuarantee: false,
+        },
       });
     }
 

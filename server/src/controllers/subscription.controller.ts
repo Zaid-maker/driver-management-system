@@ -198,10 +198,34 @@ export const checkLimits = async (req: Request, res: Response) => {
   try {
     const userId = req.user?._id;
 
-    const subscription = await Subscription.findOne({ user: userId });
+    let subscription = await Subscription.findOne({ user: userId });
 
+    // Auto-create a trial subscription if none exists (for first-time banner checks)
     if (!subscription) {
-      return res.status(404).json({ message: 'Subscription not found' });
+      const now = new Date();
+      const trialEnd = new Date(now);
+      trialEnd.setDate(trialEnd.getDate() + (PLANS['starter']?.trialDays || 14));
+
+      subscription = await Subscription.create({
+        user: userId,
+        plan: 'starter',
+        status: 'trialing',
+        currentPeriodStart: now,
+        currentPeriodEnd: trialEnd,
+        trialEnd,
+        maxDrivers: PLANS['starter']?.features.maxDrivers ?? 25,
+        features: PLANS['starter']?.features ?? {
+          maxDrivers: 25,
+          advancedAnalytics: false,
+          apiAccess: false,
+          customReports: false,
+          prioritySupport: false,
+          unlimitedDrivers: false,
+          customIntegrations: false,
+          dedicatedSupport: false,
+          slaGuarantee: false,
+        },
+      });
     }
 
     const driverCount = await Driver.countDocuments({ userId });
@@ -225,10 +249,33 @@ export const getUsageStats = async (req: Request, res: Response) => {
   try {
     const userId = req.user?._id;
 
-    const subscription = await Subscription.findOne({ user: userId });
+    let subscription = await Subscription.findOne({ user: userId });
 
     if (!subscription) {
-      return res.status(404).json({ message: 'Subscription not found' });
+      const now = new Date();
+      const trialEnd = new Date(now);
+      trialEnd.setDate(trialEnd.getDate() + (PLANS['starter']?.trialDays || 14));
+
+      subscription = await Subscription.create({
+        user: userId,
+        plan: 'starter',
+        status: 'trialing',
+        currentPeriodStart: now,
+        currentPeriodEnd: trialEnd,
+        trialEnd,
+        maxDrivers: PLANS['starter']?.features.maxDrivers ?? 25,
+        features: PLANS['starter']?.features ?? {
+          maxDrivers: 25,
+          advancedAnalytics: false,
+          apiAccess: false,
+          customReports: false,
+          prioritySupport: false,
+          unlimitedDrivers: false,
+          customIntegrations: false,
+          dedicatedSupport: false,
+          slaGuarantee: false,
+        },
+      });
     }
 
     const driverCount = await Driver.countDocuments({ userId });
