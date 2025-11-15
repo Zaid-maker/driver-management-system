@@ -18,6 +18,7 @@ interface AuthContextType {
   isAdmin: boolean;
   isDriver: boolean;
   loading: boolean;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -62,9 +63,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setToken(newToken);
       setUser(newUser);
 
+      // Calculate token expiry (30 days from now)
+      const expiryTime = new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
+
       // Save to localStorage
       localStorage.setItem('token', newToken);
       localStorage.setItem('user', JSON.stringify(newUser));
+      localStorage.setItem('tokenExpiry', expiryTime.toString());
 
       // Set token in axios defaults
       driverApi.setAuthToken(newToken);
@@ -78,8 +83,38 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('tokenExpiry');
     driverApi.setAuthToken(null);
   };
+
+  const refreshUser = async () => {
+    try {
+      if (token) {
+        const response = await driverApi.getMe();
+        const updatedUser = response.data;
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+    } catch (error) {
+      console.error('Failed to refresh user:', error);
+      logout();
+    }
+  };
+
+  // Check token expiry on mount and periodically
+  useEffect(() => {
+    const checkTokenExpiry = () => {
+      const expiry = localStorage.getItem('tokenExpiry');
+      if (expiry && new Date().getTime() > parseInt(expiry)) {
+        logout();
+      }
+    };
+
+    checkTokenExpiry();
+    const interval = setInterval(checkTokenExpiry, 60000); // Check every minute
+
+    return () => clearInterval(interval);
+  }, []);
 
   const value: AuthContextType = {
     user,
@@ -90,6 +125,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isAdmin: user?.role === 'admin',
     isDriver: user?.role === 'driver',
     loading,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
