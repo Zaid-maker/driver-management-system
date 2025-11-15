@@ -560,7 +560,7 @@ export default function Landing() {
                   ))}
                 </ul>
                 <Link
-                  to="/login"
+                  to="/dashboard/pricing"
                   className={`block w-full text-center px-6 py-3 rounded-lg font-medium transition-all ${
                     plan.popular
                       ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600'

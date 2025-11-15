@@ -117,6 +117,31 @@ export interface ApiResponse<T> {
 
 // Driver API methods
 export const driverApi = {
+  // Subscription APIs
+  getPlans: async (): Promise<ApiResponse<any>> => {
+    const response = await api.get('/plans');
+    return response.data;
+  },
+
+  getSubscription: async (): Promise<ApiResponse<any>> => {
+    const response = await api.get('/subscription');
+    return response.data;
+  },
+
+  updateSubscription: async (plan: string): Promise<ApiResponse<any>> => {
+    const response = await api.patch('/subscription', { plan });
+    return response.data;
+  },
+
+  getSubscriptionLimits: async (): Promise<ApiResponse<any>> => {
+    const response = await api.get('/subscription/limits');
+    return response.data;
+  },
+
+  getSubscriptionUsage: async (): Promise<ApiResponse<any>> => {
+    const response = await api.get('/subscription/usage');
+    return response.data;
+  },
   // Get all drivers with optional filters
   getAllDrivers: async (params?: {
     status?: string;

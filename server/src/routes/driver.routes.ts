@@ -11,11 +11,13 @@ import {
 } from '../controllers/driver.controller.js';
 import { validateDriver, validateDriverUpdate } from '../middleware/validation.js';
 import { protect, restrictTo, restrictToOwnResource } from '../middleware/auth.js';
+import { requireActiveSubscription, checkDriverLimit } from '../middleware/subscription.middleware.js';
 
 const router = Router();
 
 // Protect all routes (require authentication)
 router.use(protect);
+router.use(requireActiveSubscription);
 
 // Statistics route (admin only)
 router.get('/stats', restrictTo('admin'), getDriverStats);
@@ -33,7 +35,7 @@ router.get('/', restrictTo('admin'), getAllDrivers);
 router.get('/:id', restrictToOwnResource, getDriverById);
 
 // Create driver (admin only)
-router.post('/', restrictTo('admin'), validateDriver, createDriver);
+router.post('/', restrictTo('admin'), checkDriverLimit, validateDriver, createDriver);
 
 // Update driver (admin can update any, driver can update own)
 router.put('/:id', restrictToOwnResource, validateDriverUpdate, updateDriver);

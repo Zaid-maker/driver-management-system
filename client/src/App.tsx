@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
@@ -10,6 +10,8 @@ import DriverForm from './pages/DriverForm';
 import DriverDetail from './pages/DriverDetail';
 import CreateDriverAccount from './pages/CreateDriverAccount';
 import Calendar from './pages/Calendar';
+import Pricing from './pages/Pricing';
+import SubscriptionDashboard from './pages/SubscriptionDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          {/* Shallow redirects for friendly URLs */}
+          <Route path="/subscription" element={<Navigate to="/dashboard/subscription" replace />} />
+          <Route path="/pricing" element={<Navigate to="/dashboard/pricing" replace />} />
           <Route
             path="/dashboard"
             element={
@@ -29,6 +34,22 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+              <Route
+                path="subscription"
+                element={
+                  <ProtectedRoute>
+                    <SubscriptionDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="pricing"
+                element={
+                  <ProtectedRoute>
+                    <Pricing />
+                  </ProtectedRoute>
+                }
+              />
             <Route
               path="calendar"
               element={

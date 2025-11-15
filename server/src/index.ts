@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/database.js';
 import driverRoutes from './routes/driver.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import subscriptionRoutes from './routes/subscription.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 // Load environment variables
@@ -46,6 +47,7 @@ app.get('/api/health', (req: Request, res: Response) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/drivers', driverRoutes);
+app.use('/api', subscriptionRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

@@ -97,6 +97,29 @@ const Layout = () => {
                   </svg>
                   Calendar
                 </Link>
+                  <Link
+                    to="/dashboard/subscription"
+                    className={`inline-flex items-center px-2.5 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      isActive("/dashboard/subscription") || isActive("/dashboard/pricing")
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 shadow-sm"
+                        : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-100"
+                    }`}
+                  >
+                    <svg
+                      className="mr-1.5 h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                      />
+                    </svg>
+                    Plan
+                  </Link>
                 {isAdmin && (
                   <>
                     <Link
@@ -244,6 +267,23 @@ const Layout = () => {
                   Calendar
                 </div>
               </Link>
+
+                <Link
+                  to="/dashboard/subscription"
+                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-200 ${
+                    isActive("/dashboard/subscription") || isActive("/dashboard/pricing")
+                      ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <div className="flex items-center">
+                    <svg className="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                    Subscription
+                  </div>
+                </Link>
 
               {isAdmin && (
                 <>

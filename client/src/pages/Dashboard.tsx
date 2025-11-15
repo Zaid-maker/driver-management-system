@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import SubscriptionBanner from "../components/SubscriptionBanner";
 import { 
   driverApi, 
   type DriverStats, 
@@ -189,6 +190,7 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-8">
+      <SubscriptionBanner />
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
