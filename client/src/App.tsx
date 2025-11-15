@@ -8,6 +8,7 @@ import DriverList from './pages/DriverList';
 import DriverForm from './pages/DriverForm';
 import DriverDetail from './pages/DriverDetail';
 import CreateDriverAccount from './pages/CreateDriverAccount';
+import Calendar from './pages/Calendar';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -26,6 +27,14 @@ function App() {
             }
           >
             <Route index element={<Dashboard />} />
+            <Route
+              path="calendar"
+              element={
+                <ProtectedRoute>
+                  <Calendar />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="drivers"
               element={
