@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
@@ -261,7 +261,7 @@ const Login = () => {
           </div>
 
           <div className="text-center pt-4">
-            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-100 dark:border-blue-800 mb-3">
+            <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-100 dark:border-blue-800">
               <p className="text-xs font-semibold text-blue-800 dark:text-blue-300 mb-1">
                 Demo Credentials
               </p>
@@ -273,13 +273,6 @@ const Login = () => {
                 <span className="font-semibold">Password:</span> admin123
               </p>
             </div>
-            
-            <Link
-              to="/register"
-              className="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-            >
-              Need to create an admin account? Register here
-            </Link>
           </div>
         </form>
       </div>
