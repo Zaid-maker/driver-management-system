@@ -44,8 +44,8 @@ export default function Pricing() {
         driverApi.getPlans(),
         driverApi.getSubscription(),
       ]);
-      setPlans(plansData.data);
-      setSubscription(subData.data);
+      setPlans(plansData as any);
+      setSubscription(subData as any);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {

@@ -21,7 +21,7 @@ export default function SubscriptionBanner() {
   const fetchLimits = async () => {
     try {
       const response = await driverApi.getSubscriptionLimits();
-      setLimits(response.data);
+      setLimits(response as any);
     } catch (error) {
       console.error('Error fetching subscription limits:', error);
     }

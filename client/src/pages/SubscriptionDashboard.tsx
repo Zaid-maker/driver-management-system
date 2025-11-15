@@ -32,7 +32,7 @@ export default function SubscriptionDashboard() {
   const fetchUsageStats = async () => {
     try {
       const response = await driverApi.getSubscriptionUsage();
-      setStats(response.data);
+      setStats(response as any);
     } catch (error) {
       console.error('Error fetching usage stats:', error);
     } finally {
