@@ -73,6 +73,12 @@ app.use('/api/drivers', async (req: Request, res: Response, next: NextFunction) 
   next();
 }, driverRoutes);
 
+// Internal alias so Edge functions can call Node backend without recursion
+app.use('/api/_internal/drivers', async (req: Request, res: Response, next: NextFunction) => {
+  await connectToDatabase();
+  next();
+}, driverRoutes);
+
 app.use('/api', async (req: Request, res: Response, next: NextFunction) => {
   await connectToDatabase();
   next();

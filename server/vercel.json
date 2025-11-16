@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "functions": {
+    "api/edge/**/*.ts": { "runtime": "edge" }
+  },
   "builds": [
     {
       "src": "api/index.ts",
@@ -7,14 +10,11 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "api/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "api/index.ts"
-    }
+    { "src": "/api/drivers/stats", "dest": "api/edge/drivers/stats.ts" },
+    { "src": "/api/drivers/analytics", "dest": "api/edge/drivers/analytics.ts" },
+    { "src": "/api/_internal/(.*)", "dest": "api/index.ts" },
+    { "src": "/api/(.*)", "dest": "api/index.ts" },
+    { "src": "/(.*)", "dest": "api/index.ts" }
   ],
   "env": {
     "NODE_ENV": "production"
