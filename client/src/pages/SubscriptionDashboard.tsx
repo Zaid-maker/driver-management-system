@@ -232,7 +232,7 @@ export default function SubscriptionDashboard() {
 
       {/* Upgrade CTA */}
       {stats.subscription.plan !== 'enterprise' && (
-        <div className="mt-8 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 rounded-lg shadow-lg p-8 text-center">
+        <div className="mt-8 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800 rounded-lg shadow-lg p-8 text-center">
           <h3 className="text-2xl font-bold text-white mb-2">Ready for more?</h3>
           <p className="text-blue-100 mb-6">
             Upgrade your plan to unlock additional features and increase your driver limit

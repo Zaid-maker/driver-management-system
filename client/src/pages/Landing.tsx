@@ -5,7 +5,7 @@ export default function Landing() {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Navigation */}
       <nav className="border-b border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,7 +93,7 @@ export default function Landing() {
                 <div className="flex items-center">
                   <div className="flex -space-x-2">
                     {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 border-2 border-white dark:border-gray-800" />
+                      <div key={i} className="h-10 w-10 rounded-full bg-linear-to-br from-blue-400 to-indigo-600 border-2 border-white dark:border-gray-800" />
                     ))}
                   </div>
                   <span className="ml-3 text-sm text-gray-600 dark:text-gray-400">
@@ -105,7 +105,7 @@ export default function Landing() {
 
             {/* Right Content - Dashboard Preview */}
             <div className="relative lg:h-[600px]">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl transform rotate-3 opacity-20"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-indigo-600 rounded-2xl transform rotate-3 opacity-20"></div>
               <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
                 <div className="bg-gray-800 dark:bg-gray-900 px-4 py-3 flex items-center space-x-2">
                   <div className="flex space-x-2">
@@ -133,7 +133,7 @@ export default function Landing() {
                   <div className="space-y-3">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div key={i} className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600"></div>
+                        <div className="h-10 w-10 rounded-full bg-linear-to-br from-blue-400 to-indigo-600"></div>
                         <div className="flex-1">
                           <div className="h-2 bg-gray-300 dark:bg-gray-600 rounded w-32 mb-2"></div>
                           <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
@@ -244,7 +244,7 @@ export default function Landing() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800">
+      <section className="py-20 bg-linear-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             {[
@@ -308,7 +308,7 @@ export default function Landing() {
               },
             ].map((item, i) => (
               <div key={i} className="relative">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-8 text-center border-2 border-blue-100 dark:border-gray-700">
+                <div className="bg-linear-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 rounded-2xl p-8 text-center border-2 border-blue-100 dark:border-gray-700">
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-full">
                     Step {item.step}
                   </div>
@@ -383,7 +383,7 @@ export default function Landing() {
                   "{testimonial.quote}"
                 </p>
                 <div className="flex items-center">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white font-bold mr-4">
+                  <div className="h-12 w-12 rounded-full bg-linear-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-white font-bold mr-4">
                     {testimonial.avatar}
                   </div>
                   <div>
@@ -422,7 +422,7 @@ export default function Landing() {
               'Reporting Tools',
             ].map((integration, i) => (
               <div key={i} className="bg-gray-50 dark:bg-gray-900 rounded-lg p-6 text-center hover:shadow-lg transition-all transform hover:-translate-y-1">
-                <div className="h-16 w-16 mx-auto mb-4 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-lg flex items-center justify-center">
+                <div className="h-16 w-16 mx-auto mb-4 bg-linear-to-br from-blue-400 to-indigo-600 rounded-lg flex items-center justify-center">
                   <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -550,11 +550,11 @@ export default function Landing() {
                   </div>
                 </div>
                 <ul className="space-y-3 mb-8">
-                  {plan.features.map((feature, j) => (
-                    <li key={j} className="flex items-center text-gray-700 dark:text-gray-300">
-                      <svg className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start text-gray-700 dark:text-gray-300">
+                        <svg className="h-5 w-5 text-green-500 mr-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
                       {feature}
                     </li>
                   ))}
