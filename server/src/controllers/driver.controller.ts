@@ -197,6 +197,7 @@ export const getDriverStats = async (
       Driver.countDocuments({ licenseExpiry: { $lt: new Date() } })
     ]);
     
+    res.set('Cache-Control', 'private, max-age=30');
     res.status(200).json({
       success: true,
       data: {
@@ -293,6 +294,7 @@ export const getAnalytics = async (
       });
     }
 
+    res.set('Cache-Control', 'private, max-age=60');
     res.status(200).json({
       success: true,
       data: {
@@ -417,6 +419,7 @@ export const getRecentActivities = async (
     // Return limited number of activities
     const limitedActivities = activities.slice(0, limit);
 
+    res.set('Cache-Control', 'private, max-age=15');
     res.status(200).json({
       success: true,
       data: limitedActivities

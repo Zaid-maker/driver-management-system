@@ -5,6 +5,7 @@ import { connectDB } from '../src/config/database.js';
 import driverRoutes from '../src/routes/driver.routes.js';
 import authRoutes from '../src/routes/auth.routes.js';
 import { errorHandler } from '../src/middleware/errorHandler.js';
+import subscriptionRoutes from '../src/routes/subscription.routes.js';
 
 // Load environment variables
 dotenv.config();
@@ -14,7 +15,8 @@ const app: Express = express();
 // Middleware
 app.use(cors({
   origin: process.env.CORS_ORIGIN || '*',
-  credentials: true
+  credentials: true,
+  maxAge: 600,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -70,6 +72,11 @@ app.use('/api/drivers', async (req: Request, res: Response, next: NextFunction) 
   await connectToDatabase();
   next();
 }, driverRoutes);
+
+app.use('/api', async (req: Request, res: Response, next: NextFunction) => {
+  await connectToDatabase();
+  next();
+}, subscriptionRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

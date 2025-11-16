@@ -116,20 +116,25 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
-        // Fetch stats
-        const statsResponse = await driverApi.getStats();
-        setStats(statsResponse.data);
-        
-        // Fetch analytics data
-        try {
-          const analyticsResponse = await driverApi.getAnalytics();
-          setMonthlyRegistrationData(analyticsResponse.data.monthlyRegistrations);
-          setLicenseClassData(analyticsResponse.data.licenseClassDistribution);
-          setExpirationTimelineData(analyticsResponse.data.expirationTimeline);
-        } catch (analyticsErr) {
-          console.error("Error fetching analytics:", analyticsErr);
-          // Set fallback data if analytics endpoint fails
+
+        const [statsRes, analyticsRes, activitiesRes] = await Promise.allSettled([
+          driverApi.getStats(),
+          driverApi.getAnalytics(),
+          driverApi.getRecentActivities(4),
+        ]);
+
+        if (statsRes.status === 'fulfilled') {
+          setStats(statsRes.value.data);
+        } else {
+          throw statsRes.reason;
+        }
+
+        if (analyticsRes.status === 'fulfilled') {
+          setMonthlyRegistrationData(analyticsRes.value.data.monthlyRegistrations);
+          setLicenseClassData(analyticsRes.value.data.licenseClassDistribution);
+          setExpirationTimelineData(analyticsRes.value.data.expirationTimeline);
+        } else {
+          console.error('Error fetching analytics:', analyticsRes.reason);
           setMonthlyRegistrationData([
             { month: "Jan", drivers: 12 },
             { month: "Feb", drivers: 19 },
@@ -157,21 +162,18 @@ const Dashboard = () => {
             { month: "Apr", expiring: 7 },
           ]);
         }
-        
-        // Fetch recent activities
-        try {
-          const activitiesResponse = await driverApi.getRecentActivities(4);
-          setRecentActivities(activitiesResponse.data);
-        } catch (activitiesErr) {
-          console.error("Error fetching activities:", activitiesErr);
-          // Set fallback data if activities endpoint fails
+
+        if (activitiesRes.status === 'fulfilled') {
+          setRecentActivities(activitiesRes.value.data);
+        } else {
+          console.error('Error fetching activities:', activitiesRes.reason);
           setRecentActivities([]);
         }
-        
+
         setError(null);
       } catch (err) {
-        console.error("Error fetching data:", err);
-        setError("Failed to load dashboard data");
+        console.error('Error fetching data:', err);
+        setError('Failed to load dashboard data');
       } finally {
         setLoading(false);
       }

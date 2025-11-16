@@ -38,6 +38,7 @@ export const getSubscription = async (req: Request, res: Response) => {
       });
     }
 
+    res.set('Cache-Control', 'private, max-age=30');
     res.json(subscription);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -47,6 +48,7 @@ export const getSubscription = async (req: Request, res: Response) => {
 // Get all available plans
 export const getPlans = async (req: Request, res: Response) => {
   try {
+    res.set('Cache-Control', 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400');
     res.json(Object.values(PLANS));
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -231,6 +233,7 @@ export const checkLimits = async (req: Request, res: Response) => {
     const driverCount = await Driver.countDocuments({ userId });
     const canAddDriver = subscription.features.unlimitedDrivers || driverCount < subscription.maxDrivers;
 
+    res.set('Cache-Control', 'private, max-age=30');
     res.json({
       plan: subscription.plan,
       status: subscription.status,
@@ -287,6 +290,7 @@ export const getUsageStats = async (req: Request, res: Response) => {
       (subscription.currentPeriodEnd.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
     );
 
+    res.set('Cache-Control', 'private, max-age=15');
     res.json({
       subscription: {
         plan: subscription.plan,
